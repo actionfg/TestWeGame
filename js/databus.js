@@ -24,6 +24,10 @@ export default class DataBus {
     this.enemys     = []
     this.animations = []
     this.gameOver   = false
+
+    this.questionIndex = 0
+    this.answers = []
+    this.GenerateOptions()
   }
 
   /**
@@ -48,5 +52,26 @@ export default class DataBus {
     temp.visible = false
 
     this.pool.recover('bullet', bullet)
+  }
+
+  CheckResultExist(rst) {
+    for (let i = 0, il = this.answers.length; i < il; i++) {
+      let answer = this.answers[i]
+
+      if(answer == rst) {
+        return true
+      }
+    }
+    this.answers.push(rst)
+    this.GenerateOptions()
+    return false
+  }
+
+  GenerateOptions() {
+    this.optionA = Math.random() * 100
+    this.optionB = Math.random() * 100
+    this.optionC = Math.random() * 100
+    this.optionD = Math.random() * 100
+    console.log("Generate")
   }
 }

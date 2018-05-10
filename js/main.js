@@ -87,22 +87,59 @@ export default class Main {
     }
   }
 
-  // 游戏结束后的触摸事件处理逻辑
+  // // 游戏结束后的触摸事件处理逻辑
+  // touchEventHandler(e) {
+  //   e.preventDefault()
+
+  //   let x = e.touches[0].clientX
+  //   let y = e.touches[0].clientY
+
+  //   let area = this.gameinfo.btnArea
+
+  //   if (x >= area.startX
+  //     && x <= area.endX
+  //     && y >= area.startY
+  //     && y <= area.endY)
+  //     this.restart()
+  // }
+
   touchEventHandler(e) {
     e.preventDefault()
 
     let x = e.touches[0].clientX
     let y = e.touches[0].clientY
+    // let area = this.gameinfo.
+    let rst = -1;
+    if (this.checkTouch(x, y, this.gameinfo.btnAArea)) {
+      rst = databus.optionA  
+    }
+    else if(this.checkTouch(x,y,this.gameinfo.btnBArea)) {
+      rst = databus.optionB  
+      
+    }
+    else if(this.checkTouch(x,y,this.gameinfo.btnCArea)) {
+      rst = databus.optionC
+    }
+    else if(this.checkTouch(x,y,this.gameinfo.btnDArea)) {
+      rst = databus.optionD      
+    }
 
-    let area = this.gameinfo.btnArea
-
-    if (x >= area.startX
-      && x <= area.endX
-      && y >= area.startY
-      && y <= area.endY)
-      this.restart()
+    if (rst != -1) {
+      if (databus.CheckResultExist(rst)) {
+        databus.gameOver = true;
+      }
+      else {
+        databus.GenerateOptions()
+      }
+    }
   }
 
+  checkTouch(x,y,area) {
+    return x >= area.startX
+      && x <= area.endX
+      && y >= area.startY
+      && y <= area.endY;
+  }
   /**
    * canvas重绘函数
    * 每一帧重新绘制所有的需要展示的元素
@@ -112,31 +149,37 @@ export default class Main {
 
     this.bg.render(ctx)
 
-    databus.bullets
-      .concat(databus.enemys)
-      .forEach((item) => {
-        item.drawToCanvas(ctx)
-      })
+    // databus.bullets
+    //   .concat(databus.enemys)
+    //   .forEach((item) => {
+    //     item.drawToCanvas(ctx)
+    //   })
 
-    this.player.drawToCanvas(ctx)
+    // this.player.drawToCanvas(ctx)
 
-    databus.animations.forEach((ani) => {
-      if (ani.isPlaying) {
-        ani.aniRender(ctx)
-      }
-    })
+    // databus.animations.forEach((ani) => {
+    //   if (ani.isPlaying) {
+    //     ani.aniRender(ctx)
+    //   }
+    // })
 
-    this.gameinfo.renderGameScore(ctx, databus.score)
+    // this.gameinfo.renderGameScore(ctx, databus.score)
+    this.gameinfo.renderQuestion(ctx,databus.score,databus.optionA,databus.optionB,databus.optionC,databus.optionD)
 
+    if (!this.hasEventBind) {
+      this.hasEventBind = true
+      this.touchHandler = this.touchEventHandler.bind(this)
+      canvas.addEventListener('touchstart', this.touchHandler)
+    }
     // 游戏结束停止帧循环
     if (databus.gameOver) {
       this.gameinfo.renderGameOver(ctx, databus.score)
 
-      if (!this.hasEventBind) {
-        this.hasEventBind = true
-        this.touchHandler = this.touchEventHandler.bind(this)
-        canvas.addEventListener('touchstart', this.touchHandler)
-      }
+      // if (!this.hasEventBind) {
+      //   this.hasEventBind = true
+      //   this.touchHandler = this.touchEventHandler.bind(this)
+      //   canvas.addEventListener('touchstart', this.touchHandler)
+      // }
     }
   }
 
@@ -145,22 +188,22 @@ export default class Main {
     if (databus.gameOver)
       return;
 
-    this.bg.update()
+    // this.bg.update()
 
-    databus.bullets
-      .concat(databus.enemys)
-      .forEach((item) => {
-        item.update()
-      })
+    // databus.bullets
+    //   .concat(databus.enemys)
+    //   .forEach((item) => {
+    //     item.update()
+    //   })
 
-    this.enemyGenerate()
+    // this.enemyGenerate()
 
-    this.collisionDetection()
+    // this.collisionDetection()
 
-    if (databus.frame % 20 === 0) {
-      this.player.shoot()
-      this.music.playShoot()
-    }
+    // if (databus.frame % 20 === 0) {
+    //   this.player.shoot()
+    //   this.music.playShoot()
+    // }
   }
 
   // 实现游戏帧循环

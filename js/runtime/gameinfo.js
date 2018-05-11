@@ -21,38 +21,38 @@ export default class GameInfo {
     ctx.font = "20px Arial"
 
     ctx.fillText(score, 10, 30)
-    ctx.fillText("请选择一个未选择过的数字", screenWidth / 2 - 80, screenHeight / 2 - 100 + 50)
+    ctx.fillText("请选择一个未选择过的数字", screenWidth / 2 - 100, screenHeight / 2 - 100 + 50)
 
-    ctx.fillText("A: " + option1, screenWidth / 2 - 80, screenHeight / 2)
+    ctx.fillText("A: " + option1, screenWidth / 2 - 100, screenHeight / 2)
     this.btnAArea = {
-      startX: screenWidth / 2 - 80,
-      startY: screenHeight / 2,
+      startX: screenWidth / 2 - 100,
+      startY: screenHeight / 2 - 50,
       endX: screenWidth / 2 - 50,
-      endY: screenHeight / 2 + 50
+      endY: screenHeight / 2 
     }
 
-    ctx.fillText("B: " + option2, screenWidth / 2 - 40, screenHeight / 2)
+    ctx.fillText("B: " + option2, screenWidth / 2 - 50, screenHeight / 2)
     this.btnBArea = {
-      startX: screenWidth / 2 - 40,
-      startY: screenHeight / 2,
+      startX: screenWidth / 2 - 50,
+      startY: screenHeight / 2 - 50,
       endX: screenWidth / 2 - 10,
-      endY: screenHeight / 2 + 50
+      endY: screenHeight / 2
     }
 
     ctx.fillText("C: " + option3, screenWidth / 2 , screenHeight / 2)
     this.btnCArea = {
       startX: screenWidth / 2,
-      startY: screenHeight / 2,
+      startY: screenHeight / 2 - 50,
       endX: screenWidth / 2 + 30,
-      endY: screenHeight / 2 + 50
+      endY: screenHeight / 2
     }
 
-    ctx.fillText("D: " + option1, screenWidth / 2 + 40, screenHeight / 2)
+    ctx.fillText("D: " + option1, screenWidth / 2 + 50, screenHeight / 2)
     this.btnDArea = {
-      startX: screenWidth / 2 + 40,
-      startY: screenHeight / 2,
+      startX: screenWidth / 2 + 50,
+      startY: screenHeight / 2 - 50,
       endX: screenWidth / 2 + 70,
-      endY: screenHeight / 2 + 50
+      endY: screenHeight / 2
     }
   }
 

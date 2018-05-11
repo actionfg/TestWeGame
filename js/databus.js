@@ -64,14 +64,16 @@ export default class DataBus {
     }
     this.answers.push(rst)
     this.GenerateOptions()
+    this.score += 1;
     return false
   }
 
   GenerateOptions() {
-    this.optionA = Math.random() * 100
-    this.optionB = Math.random() * 100
-    this.optionC = Math.random() * 100
-    this.optionD = Math.random() * 100
-    console.log("Generate")
+    this.optionA = parseInt(Math.random() * 100)
+    this.optionB = parseInt(Math.random() * 100);
+    this.optionC = parseInt(Math.random() * 100)
+    this.optionD = parseInt(Math.random() * 100)
+    console.log("Generate: " + this.optionA + ", " + this.optionB +
+      ", " + this.optionC + ", " + this.optionD);
   }
 }

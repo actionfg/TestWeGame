@@ -128,9 +128,6 @@ export default class Main {
       if (databus.CheckResultExist(rst)) {
         databus.gameOver = true;
       }
-      else {
-        databus.GenerateOptions()
-      }
     }
   }
 
